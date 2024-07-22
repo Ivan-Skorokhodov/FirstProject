@@ -1,0 +1,30 @@
+package api
+
+import (
+	"FirstProject/pkg/olimpiad"
+	"FirstProject/pkg/tableOlimpiads"
+	"fmt"
+	"net/http"
+	"strconv"
+)
+
+type httpHandlerForAddOlimp struct {
+	olimpDataTable *tableOlimpiads.TableOlimpiads
+}
+
+func NewHandlerForAddOlimp(olimpDataTable *tableOlimpiads.TableOlimpiads) httpHandlerForAddOlimp {
+	return httpHandlerForAddOlimp{olimpDataTable: olimpDataTable}
+}
+
+func (h httpHandlerForAddOlimp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	name := r.FormValue("name")
+	subject := r.FormValue("subject")
+	level := r.FormValue("level")
+
+	levelInt, _ := strconv.Atoi(level)
+
+	olimp := olimpiad.NewOlimpiad(name, subject, levelInt)
+	h.olimpDataTable.Add(olimp)
+
+	fmt.Fprintf(w, "We add olimp with name: %s, subject: %s, level: %s", name, subject, level)
+}
