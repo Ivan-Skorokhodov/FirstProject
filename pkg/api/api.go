@@ -13,16 +13,16 @@ func FillEndpoints() {
 	peopleDataTable := tablePeople.NewTable(make(map[person.Person]int))
 	olimpDataTable := tableOlimpiads.NewTable(make(map[int]olimpiad.Olimp))
 
-	h1 := NewHandlerStartOlimp()
-	h2 := NewHandlerStartPerson()
-	h3 := NewHandlerForAddPerson(&peopleDataTable, &olimpDataTable)
-	h4 := NewHandlerForShawPeople(&peopleDataTable, &olimpDataTable)
-	h5 := NewHandlerForAddOlimp(&olimpDataTable)
+	h1 := NewHandlerAddOlimp()
+	h2 := NewHandlerAddPerson()
+	h3 := NewHandlerShawAddedPerson(&peopleDataTable, &olimpDataTable)
+	h4 := NewHandlerShawAddedOlimp(&olimpDataTable)
+	h5 := NewHandlerShawAllPeople(&peopleDataTable, &olimpDataTable)
 
-	http.Handle("/startOlimp", h1)
-	http.Handle("/startPerson", h2)
-	http.Handle("/addPerson", h3)
-	http.Handle("/addOlimp", h5)
-	http.Handle("/shawAll", h4)
+	http.Handle("/addOlimp", h1)
+	http.Handle("/addPerson", h2)
+	http.Handle("/shawPerson", h3)
+	http.Handle("/shawOlimp", h4)
+	http.Handle("/shawAll", h5)
 
 }

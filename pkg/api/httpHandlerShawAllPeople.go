@@ -7,16 +7,16 @@ import (
 	"net/http"
 )
 
-type httpHandlerForShawPeople struct {
+type httpHandlerShawAllPeople struct {
 	peolpeDataTable *tablePeople.TablePeople
 	olimpDataTable *tableOlimpiads.TableOlimpiads
 }
 
-func NewHandlerForShawPeople(peolpeDataTable *tablePeople.TablePeople, olimpDataTable *tableOlimpiads.TableOlimpiads) httpHandlerForShawPeople {
-	return httpHandlerForShawPeople{peolpeDataTable: peolpeDataTable, olimpDataTable: olimpDataTable}
+func NewHandlerShawAllPeople(peolpeDataTable *tablePeople.TablePeople, olimpDataTable *tableOlimpiads.TableOlimpiads) httpHandlerShawAllPeople {
+	return httpHandlerShawAllPeople{peolpeDataTable: peolpeDataTable, olimpDataTable: olimpDataTable}
 }
 
-func (h httpHandlerForShawPeople) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (h httpHandlerShawAllPeople) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	for person, olimpNumber := range *h.peolpeDataTable.GetTable() {
 		fmt.Fprintf(w, "Name: %s, age: %d, olimp: %s\n", person.GetName(), person.GetAge(), h.olimpDataTable.GetOlimp(olimpNumber).GetName())
 	}

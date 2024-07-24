@@ -9,16 +9,16 @@ import (
 	"strconv"
 )
 
-type httpHandlerForAddPerson struct {
+type httpHandlerShawAddedPerson struct {
 	peolpeDataTable *tablePeople.TablePeople
 	olimpDataTable *tableOlimpiads.TableOlimpiads
 }
 
-func NewHandlerForAddPerson(peolpeDataTable *tablePeople.TablePeople, olimpDataTable *tableOlimpiads.TableOlimpiads) httpHandlerForAddPerson {
-	return httpHandlerForAddPerson{peolpeDataTable: peolpeDataTable, olimpDataTable: olimpDataTable}
+func NewHandlerShawAddedPerson(peolpeDataTable *tablePeople.TablePeople, olimpDataTable *tableOlimpiads.TableOlimpiads) httpHandlerShawAddedPerson {
+	return httpHandlerShawAddedPerson{peolpeDataTable: peolpeDataTable, olimpDataTable: olimpDataTable}
 }
 
-func (h httpHandlerForAddPerson) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (h httpHandlerShawAddedPerson) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
 	age := r.FormValue("age")
 	olimpNumber := r.FormValue("olimpNumber")

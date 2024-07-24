@@ -8,15 +8,15 @@ import (
 	"strconv"
 )
 
-type httpHandlerForAddOlimp struct {
+type httpHandlerShawAddedOlimp struct {
 	olimpDataTable *tableOlimpiads.TableOlimpiads
 }
 
-func NewHandlerForAddOlimp(olimpDataTable *tableOlimpiads.TableOlimpiads) httpHandlerForAddOlimp {
-	return httpHandlerForAddOlimp{olimpDataTable: olimpDataTable}
+func NewHandlerShawAddedOlimp(olimpDataTable *tableOlimpiads.TableOlimpiads) httpHandlerShawAddedOlimp {
+	return httpHandlerShawAddedOlimp{olimpDataTable: olimpDataTable}
 }
 
-func (h httpHandlerForAddOlimp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (h httpHandlerShawAddedOlimp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
 	subject := r.FormValue("subject")
 	level := r.FormValue("level")
