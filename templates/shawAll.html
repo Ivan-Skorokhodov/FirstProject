@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shaw All</title>
+  </head>
+  <body>
+    <h1>People list</h1>
+    <ul>
+      {{range .Users}}
+      <li><b>{{ . }}</b></li>
+      {{end}}
+    </ul>
+  </body>
+</html>

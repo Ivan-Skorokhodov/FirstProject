@@ -3,7 +3,7 @@ package api
 import (
 	"FirstProject/pkg/tableOlimpiads"
 	"FirstProject/pkg/tablePeople"
-	"fmt"
+	"html/template"
 	"net/http"
 )
 
@@ -16,8 +16,23 @@ func NewHandlerShawAllPeople(peolpeDataTable *tablePeople.TablePeople, olimpData
 	return httpHandlerShawAllPeople{peolpeDataTable: peolpeDataTable, olimpDataTable: olimpDataTable}
 }
 
+type ViewData struct{
+    Users []User
+}
+type User struct{
+    Name string
+	Olimp string
+    Age int
+}
+
 func (h httpHandlerShawAllPeople) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	var data ViewData
+
 	for person, olimpNumber := range *h.peolpeDataTable.GetTable() {
-		fmt.Fprintf(w, "Name: %s, age: %d, olimp: %s\n", person.GetName(), person.GetAge(), h.olimpDataTable.GetOlimp(olimpNumber).GetName())
+		new_element := User{Name: person.GetName(), Age: person.GetAge(), Olimp: h.olimpDataTable.GetOlimp(olimpNumber).GetName()}
+		data.Users = append(data.Users, new_element)
 	}
+
+	tmpl, _ := template.ParseFiles("/home/skor/FirstProject/templates/shawAll.html")
+    tmpl.Execute(w, data)
 }
